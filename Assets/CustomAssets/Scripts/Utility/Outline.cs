@@ -82,6 +82,9 @@ public class Outline : MonoBehaviour
 		else if (l_ClonedOutlineGameObject.GetComponentInChildren<CapsuleCollider>())
 			l_ClonedOutlineGameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
 
+		if (l_ClonedOutlineGameObject.GetComponentInChildren<Rigidbody>())
+			Destroy(l_ClonedOutlineGameObject.GetComponentInChildren<Rigidbody>());
+
 		// Then return the renderer settings 
 		return l_Renderer;
 	}
