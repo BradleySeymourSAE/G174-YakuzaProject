@@ -20,11 +20,14 @@ public class JailcellSceneManager : MonoBehaviour
 	[SerializeField] private bool debugging = false, useWireSphere = false;
 	[SerializeField] protected Transform m_CurrentPlayer;
 	[SerializeField] protected Transform m_Camera;
+	[SerializeField] protected float waitTimeBetweenRadioStatic = 120f;
 
 	#endregion
 
-	protected Coroutine m_SpawnRoutine;
 
+	protected Coroutine m_SpawnRoutine;
+	protected Coroutine m_StaticRadioRoutine;
+	
 	#region Debug 
 
 	private void OnDrawGizmos()
@@ -57,12 +60,32 @@ public class JailcellSceneManager : MonoBehaviour
 
 		m_Camera = Camera.main.transform;
 		m_SpawnRoutine = StartCoroutine(SpawnPlayer());
+
+		if (m_StaticRadioRoutine != null)
+			StopCoroutine(m_StaticRadioRoutine);
+
+		m_StaticRadioRoutine = StartCoroutine(RadioStatic());
 	}
 
 	private void DespawnPlayer()
 	{
 		m_Camera.GetComponentInChildren<Camera>().enabled = true;
 		Destroy(m_CurrentPlayer.gameObject);
+	}
+
+	private IEnumerator RadioStatic()
+	{
+		while(true)
+		{
+			if (AudioManager.IsPlayingSound(GameSound.StaticRadio))
+			{
+				yield return null;
+			}
+			AudioManager.PlaySound(GameSound.StaticRadio);
+			yield return new WaitForSeconds(waitTimeBetweenRadioStatic);
+		}
+		#pragma warning disable 0162
+		yield return null;
 	}
 
 	private IEnumerator SpawnPlayer()

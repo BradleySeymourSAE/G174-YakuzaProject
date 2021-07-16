@@ -233,8 +233,8 @@ public class RigidbodyFirstPersonController : MonoBehaviour
             Grab(l_CurrentCameraRay);
         }
 
-       
-        m_PreviousClickable = CheckMouseHoveringOverUI(l_CurrentCameraRay);
+ 
+       m_PreviousClickable = CheckMouseHoveringOverUI(l_CurrentCameraRay);
 
         if (GameManager.Debugging)
 		{
