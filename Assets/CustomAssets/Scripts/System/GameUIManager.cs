@@ -48,16 +48,12 @@ public class GameUIManager : MonoBehaviour
 
 		LoadingStateManager.MainScreenLoadingEvent.AddListener(() => EnableScreen(mainMenuScreen));
 		LoadingStateManager.LoadingEvent.AddListener(() => EnableScreen(loadingScreen));
-
-		// LightSwitchTrigger.DisplayLightSwitchUIEvent.AddListener(() => EnableScreen(onScreenDisplay));
 	}
 
 	private void OnDisable()
 	{
 		LoadingStateManager.MainScreenLoadingEvent.RemoveListener(() => EnableScreen(mainMenuScreen));
 		LoadingStateManager.LoadingEvent.RemoveListener(() => EnableScreen(loadingScreen));
-
-		// LightSwitchTrigger.DisplayLightSwitchUIEvent.RemoveListener(() => EnableScreen(onScreenDisplay));
 	}
 
 	protected void Awake() => Setup();
@@ -266,31 +262,6 @@ public class GameUIManager : MonoBehaviour
 		#endregion
 
 	}
-
-	/* 
-	[System.Serializable]
-	public class OnScreenUI : BaseUIScreen
-	{
-
-		/// <summary>
-		///		Interaction Prompt Text - i.e Press E to Interact 
-		/// </summary>
-		public TMP_Text interactActionText;
-		public TMP_Text grabPrompt;
-		public Button actionButton;
-	
-		public override void Setup()
-		{
-			grabPrompt.text = UI.OnScreenUI_GrabActionText;
-		}
-
-		public override void SetupButtonMethods()
-		{
-			UI.SetupButtonMethods(actionButton, () => LightSwitchTrigger.DisplayLightSwitchUIEvent?.Invoke(), UI.OnScreenUI_InteractActionText);
-		}
-	}
-	*/
-
 	#endregion
 
 }
@@ -313,9 +284,7 @@ public class UI
 	public const string CreditsMenu_Title = "Prison Break - Credits";
 	public const string CreditsMenu_Developer_Heading = "G174 Shippable Assets Project\nCreated by Bradley Seymour 21T2";
 	public const string CreditsMenu_CloseButton = "Return";
-	
-	public const string OnScreenUI_InteractActionText = "Press E to Interact";
-	public const string OnScreenUI_GrabActionText = "Right Click to Grab";
+
 	#endregion
 
 	#endregion
